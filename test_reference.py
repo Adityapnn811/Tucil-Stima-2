@@ -21,7 +21,7 @@ for i in range(len(data.target_names)):
     bucket = df[df['Target'] == i]
     bucket = bucket.iloc[:,[0,1]].values
     # print("sorting ku")
-    # print(sortList(bucket, 0))
+    print(bucket)
     hull = ConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
     # print(bucket[hull.vertices])
     plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i])

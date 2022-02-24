@@ -4,10 +4,11 @@
         - Cek yang mencari jarak antara titik dengan garis (done)
         - yang jarak itu, kelompokkin nilai A, b sama c dulu dari rumus (done)
 """
+import math
 # Fungsi untuk menghitung determinan dari 3 titik
 def determinan(x1, y1, x2, y2, x3, y3):
     # (x1, y1) membentuk garis dengan (x2, y2), (x3, y3) adalah titik yang dicari
-    return (x1 * y2 + x3 * y1 + x2 * y3) - (x3 * y2 + x2 * y1 + x1 * y3)
+    return ((x1 * y2) + (x3 * y1) + (x2 * y3)) - ((x3 * y2) + (x2 * y1) + (x1 * y3))
 
 
 # Fungsi menghasilkan jarak antar titik
@@ -15,23 +16,20 @@ def jarakDuaTitik(x1, y1, x2, y2):
     return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 
 
-# Fungsi mencari luas segitiga yang terbentuk oleh garis dengan titik
-def luasSegitiga(x1, y1, x2, y2, x3, y3):
-    # (x1, y1) dan (x2, y2) adalah garis asli
-    garis = round(jarakDuaTitik(x1, y1, x2, y2), 6)
-    garis_b = round(jarakDuaTitik(x1, y1, x3, y3), 6)
-    garis_c = round(jarakDuaTitik(x2, y2, x3, y3), 6)
-    semiperimeter = round(0.5 * (garis + garis_b + garis_c), 6)
-    return (semiperimeter * (semiperimeter - garis) * (semiperimeter - garis_b) * (semiperimeter - garis_c)) ** 0.5
-
-
 # Fungsi mencari tinggi segitiga (jarak titik dengan garis) setelah diketahui luas dan alas
-def jarakTitikGaris(x1, y1, x2, y2, x3, y3):
-    # Menggunakan rumus mencari garis, kemudian gunakan d = Ax + By + C / sqrt(A^2 + B^2)
-    A = 1/(x2 - x1)
-    B = -1/(y2 - y1)
-    C = (y1/(y2 - y1)) - (x1/(x2 - x1))
-    return abs((A * x3 + B * y3 + C) / (A ** 2 + B ** 2) ** 0.5)
+def sudutTigaTitik(x1, y1, x2, y2, x3, y3):
+    u = [(x1 - x2), (y1 - y2)]
+    v = [(x1 - x3), (y1 - y3)]
+    udotv = u[0] * v[0] + u[1] * v[1]
+    panjangU = (u[0]**2 + u[1]**2)**0.5
+    panjangV = (v[0]**2 + v[1]**2)**0.5
+    # print(udotv, panjangU, panjangV)
+    return math.acos(udotv/(panjangU * panjangV))
+    # # Menggunakan rumus mencari garis, kemudian gunakan d = Ax + By + C / sqrt(A^2 + B^2)
+    # A = 1/(x2 - x1)
+    # B = -1/(y2 - y1)
+    # C = (y1/(y2 - y1)) - (x1/(x2 - x1))
+    # return abs((A * x3 + B * y3 + C) / (A ** 2 + B ** 2) ** 0.5)
 
 # Fungsi untuk melakukan sorting list titik terurut dari terkecil ke besar
 # Akan melakukan sorting berdasarkan Y jika byY = 1, X jika 0
@@ -61,83 +59,96 @@ def sortList(listTitik, byY):
 
 
 # Fungsi yang melakukan merge dua titik
-def merge(listTitik1, listTitik2):
-    listTitikHasil = []
-    if listTitik1 != None:
-        for i in range (0, len(listTitik1)):
-            listTitikHasil.append(listTitik1[i])
-    if listTitik2 != None:
-        for i in range (0, len(listTitik2)):
-            listTitikHasil.append(listTitik2[i])
-    return listTitikHasil
+def merge(listIndeks1, listIndeks2):
+    listIndeksHasil = []
+    if listIndeks1 != None:
+        for i in range (0, len(listIndeks1)):
+            if listIndeks1[i] not in listIndeksHasil:
+                listIndeksHasil.append(listIndeks1[i])
+    if listIndeks2 != None:
+
+        for i in range (0, len(listIndeks2)):
+            if listIndeks2[i] not in listIndeksHasil:
+                listIndeksHasil.append(listIndeks2[i])
+    return listIndeksHasil
 
 
 # Fungsi yang mencari jarak maksimum, listTitik tidak kosong. Mengembalikan indeks titik maksimum
-def jarakMaks(p1, pn, listTitik):
-    max = jarakTitikGaris(p1[0], p1[1], pn[0], pn[1], listTitik[0][0], listTitik[0][1])
+def sudutMaks(i1, i_n, listTitik, listIndeks):
+    max = 0
     idx = 0
-    for i in range(1, len(listTitik)):
-        if (jarakTitikGaris(p1[0], p1[1], pn[0], pn[1], listTitik[i][0], listTitik[i][1])) > max:
-            max = jarakTitikGaris(p1[0], p1[1], pn[0], pn[1], listTitik[i][0], listTitik[i][1])
+    for i in listIndeks:
+        if (sudutTigaTitik(listTitik[i1][0], listTitik[i1][1], listTitik[i_n][0], listTitik[i_n][1], listTitik[i][0], listTitik[i][1])) > max:
+            max = sudutTigaTitik(listTitik[i1][0], listTitik[i1][1], listTitik[i_n][0], listTitik[i_n][1], listTitik[i][0], listTitik[i][1])
             idx = i
     return idx
 
 
-# Fungsi yang mencari titik terluar secara rekursif
-def searchHull(listTitik, p1, p2, pmax):
-    # basis saat list Titik tinggal 1
-    if len(listTitik) <= 1:
-        return listTitik
-    else:
-        # Cari S1 dan S2 lagi
-        S1 = []
-        S2 = []
-        for i in range(0, len(listTitik)):
-            if determinan(p1[0], p1[1], pmax[0], pmax[1], listTitik[i][0], listTitik[i][1]) > 0:
-                S1.append(listTitik[i])
-            if determinan(p2[0], p2[1], pmax[0], pmax[1], listTitik[i][0], listTitik[i][1]) < 0:
-                S2.append(listTitik[i])
-        if len(S1) > 0 and len(S2) > 0:
-            idx_pmax1 = jarakMaks(p1, pmax, S1)
-            idx_pmax2 = jarakMaks(p2, pmax, S2)
-            return merge(searchHull(S1, p1, pmax, S1[idx_pmax1]), searchHull(S2, p2, pmax, S2[idx_pmax2]))
-        elif len(S1) > 0 and len(S2) == 0:
-            idx_pmax1 = jarakMaks(p1, pmax, S1)
-            # print(idx_pmax1, S1, p1, pmax)
-            return searchHull(S1, p1, pmax, S1[idx_pmax1])
-        elif len(S1) == 0 and len(S2) > 0:
-            idx_pmax2 = jarakMaks(p2, pmax, S2)
-            return searchHull(S2, p1, pmax, S2[idx_pmax2])
+# Fungsi mencari S1 dan S2
+def findS1AndS2(listTitik, listIndeks, i1, i_n):
+    S1 = []
+    S2 = []
 
+    for i in listIndeks:
+        if i != i1 and i != i_n:
+            if determinan(listTitik[i1][0], listTitik[i1][1], listTitik[i_n][0], listTitik[i_n][1], listTitik[i][0], listTitik[i][1]) > 0:
+                S1.append(i)
+            elif determinan(listTitik[i1][0], listTitik[i1][1], listTitik[i_n][0], listTitik[i_n][1], listTitik[i][0], listTitik[i][1]) < 0:
+                S2.append(i)
+    return S1, S2
+
+
+# Fungsi yang mencari titik terluar bagian atas secara rekursif
+def searchHullUp(listTitik, listIndeksUp, i1, i2):
+    # basis saat list Titik tinggal 1
+    if len(listIndeksUp) < 1:
+        hasil = [[i1, i2]]
+        return hasil
+    else:
+        # Cari indeks maksimum
+        idx_pmax = sudutMaks(i1, i2, listTitik, listIndeksUp)
+        # Cari S1 dan S2 lagi untuk i1 pmax dan i2 pmax
+        S11, unused = findS1AndS2(listTitik, listIndeksUp, i1, idx_pmax)
+        S12, unused2 = findS1AndS2(listTitik, listIndeksUp, idx_pmax, i2)
+        # S2 tidak terpakai karena dia di dalam bangun
+
+        return merge(searchHullUp(listTitik, S11, i1, idx_pmax), searchHullUp(listTitik, S12, idx_pmax, i2))
+
+
+# Fungsi yang mencari titik terluar bagian bawah secara rekursif
+def searchHullDown(listTitik, listIndeksDown, i1, i2):
+    # basis saat list Titik tinggal 1
+    if len(listIndeksDown) < 1:
+        return [[i1, i2]]
+    else:
+        # Cari indeks maksimum
+        idx_pmax = sudutMaks(i1, i2, listTitik, listIndeksDown)
+        # Cari S1 dan S2 lagi untuk i1 pmax dan i2 pmax
+        unused, S11 = findS1AndS2(listTitik, listIndeksDown, i1, idx_pmax)
+        unused2, S12 = findS1AndS2(listTitik, listIndeksDown, idx_pmax, i2)
+        # S2 tidak terpakai karena dia di dalam bangun
+
+        return merge(searchHullDown(listTitik, S11, i1, idx_pmax), searchHullDown(listTitik, S12, idx_pmax, i2))
 
 
 # Fungsi myConvexHull
 def myConvexHull(listTitik):
     # Basis adalah ketika listTitik tinggal 1
     if listTitik.shape[0] <= 3:
-        return listTitik
+        return [0, 1, 2]
     else:
         # selain itu, cari dua titik yang membagi menjadi dua (atas bawah)
-        # print(listTitik)
-        listTitik = sortList(listTitik, 0)
-        print(listTitik)
-        p1 = listTitik[0] # p1 adalah titik paling bawah
-        pn = listTitik[-1] # pn adalah titik paling atas
+        # listTitik = sortList(listTitik, 0)
+        listIndeks = []
+        for i in range(len(listTitik)):
+            listIndeks.append(i)
+        # Indeks awal dan indeks akhir
+        iAwal = listIndeks[0]
+        iAkhir = listIndeks[-1]
         # Buat S1 dan S2, S1 adalah titik yang di atas
-        S1 = []
-        S2 = []
-
-        for i in range(1, listTitik.shape[0] - 1):
-            if determinan(p1[0], p1[1], pn[0], pn[1], listTitik[i][0], listTitik[i][1]) > 0:
-                S1.append(listTitik[i])
-            elif determinan(p1[0], p1[1], pn[0], pn[1], listTitik[i][0], listTitik[i][1]) < 0:
-                S2.append(listTitik[i])
-        # print(S1, p1)
-        # cari pmax1 dan pmax2
-        idx_pmax1 = jarakMaks(p1, pn, S1)
-        idx_pmax2 = jarakMaks(p1, pn, S2)
-        hull = merge(searchHull(S1, p1, pn, S1[idx_pmax1]), searchHull(S2, p1, pn, S2[idx_pmax2]))
-        hull.append(p1)
-        hull.append(pn)
-        print(hull)
+        listIndeks.remove(listIndeks[0])
+        listIndeks.remove(listIndeks[-1])
+        S1, S2 = findS1AndS2(listTitik, listIndeks, iAwal, iAkhir)
+        hull = merge(searchHullUp(listTitik, S1, iAwal, iAkhir), searchHullDown(listTitik, S2, iAwal, iAkhir))
+        return hull
 

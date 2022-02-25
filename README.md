@@ -35,10 +35,15 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 |──README.md
 ```
 
-## Environment
+## Environment dan Requirements
 ```
 -Python 3.9
 -Windows 10
+-Library pandas python
+-Library math python
+-Library mathplotlib python
+-
+
 ```
 
 ## Cara Menggunakan Library

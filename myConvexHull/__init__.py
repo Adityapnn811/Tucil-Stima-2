@@ -1,2 +1,0 @@
-from myConvexHull.convexHull import sortList
-from myConvexHull.convexHull import myConvexHull

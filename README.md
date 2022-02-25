@@ -43,7 +43,6 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 -Library math python
 -Library mathplotlib python
 -Library sklearn python
-
 ```
 
 ## Cara Menggunakan Library

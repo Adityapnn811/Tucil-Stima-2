@@ -1,0 +1,4 @@
+List dataset yang digunakan:
+1. load_iris() kolom [0:1]
+2. load_iris() kolom [2:3]
+3. load_wine() kolom [0:1]

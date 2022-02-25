@@ -42,7 +42,7 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 -Library pandas python
 -Library math python
 -Library mathplotlib python
--
+-Library sklearn python
 
 ```
 

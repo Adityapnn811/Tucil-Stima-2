@@ -36,8 +36,10 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 ```
 
 ## Environment
+```
 -Python 3.9
 -Windows 10
+```
 
 ## Cara Menggunakan Library
 1. Download folder `src` dari repository ini atau lakukan clone repository ini 

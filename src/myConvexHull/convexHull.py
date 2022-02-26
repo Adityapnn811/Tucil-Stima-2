@@ -1,9 +1,5 @@
-"""TODO: - Laporan, readme, struktur kde
-        - Comment dan modular kode (done)
-
-"""
-import ConvexHull.sort as s
-import ConvexHull.mathematics as m
+import myConvexHull.sort as s
+import myConvexHull.mathematics as m
 
 # Fungsi yang melakukan merge dua list indeks
 def merge(listIndeks1, listIndeks2):

@@ -23,15 +23,15 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 ```
 |──src
 |   |──main.py
-|   |──ConvexHull
+|   |──myConvexHull
 |       |──__init__.py
 |       |──convexHull.py
 |       |──mathematics.py
 |       |──sort.py
-|──test
-|   |──listData.txt         [Berisi list dataset yang digunakan untuk testing]
+|──test                             [Direktori ini juga akan berisi hasil gambar diagram jika pengguna memilih untuk menyimpan hasil gambar]
+|   |──listData.txt                 [Berisi list dataset yang digunakan untuk testing]
 |──doc
-|   |──Laporan.pdf          [Laporan Tugas Kecil 2 Stima]
+|   |──Tucil2_13520049.pdf          [Laporan Tugas Kecil 2 Stima]
 |──README.md
 ```
 
@@ -47,7 +47,7 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 
 ## Cara Menggunakan Library
 1. Download folder `src` dari repository ini atau lakukan clone repository ini 
-2. Lakukan import pada _script_ Anda dengan `import src.ConvexHull.[modul]`
+2. Lakukan import pada _script_ Anda dengan `import src.myConvexHull.[modul]`
 3. Selesai!
 
 ## Cara Run Program
@@ -55,7 +55,10 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 2. Buka terminal pada folder repository ini, kemudian ganti direktori ke src dengan cara `cd src`
 3. Jika Anda menggunakan windows, run `main.py` dengan perintah `py main.py`
 4. Jika Anda menggunakan Linux based system, run `main.py` dengan perintah `python3 main.py`
-5. Ikuti perintah pada terminal, program selesai dijalankan.
+5. Pilih dataset yang Anda inginkan!
+6. Pilih kolom dari dataset yang Anda inginkan!
+7. Jika ingin menyimpan gambar, input nama file gambar.
+8. Gambar akan disimpan pada folder `test`.
 
 ## Author
 Aditya Prawira Nugroho - 13520049

@@ -85,6 +85,6 @@ print("Apakah Anda ingin menyimpan diagram?")
 save = input("Input Y/N: ")
 if (save == "Y" or save == 'y'):
     namaFile = input("Masukan nama file: ")
-    plt.savefig("./src/" + namaFile + ".png")
-    print("Gambar berhasil disimpan di folder test dengan nama file " + namaFile + ".png")
+    plt.savefig("../src/" + namaFile + ".png")
+    print("Gambar berhasil disimpan di folder src dengan nama file " + namaFile + ".png")
 plt.show()

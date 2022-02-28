@@ -47,8 +47,9 @@ Requirements:
 
 ## Cara Menggunakan Library
 1. Download repository ini atau lakukan clone repository ini 
-2. Lakukan import pada _script_ Anda dengan `import src.myConvexHull.convexHull`
-3. Selesai!
+2. 
+3. Lakukan import pada _script_ Anda dengan `import [Direktori Sebelumnya (jika ada)].src.myConvexHull.convexHull`
+4. Selesai!
 
 ## Cara Run Program
 1. Download repository ini atau lakukan clone repository

@@ -5,7 +5,7 @@
 ## Daftar Isi
 - [Deskripsi](#deskripsi)
 - [Direktori](#direktori)
-- [_Environment_](#environment)
+- [_Environment_ dan _Requirements_](#environment-dan-requirements)
 - [Cara Menggunakan Library](#cara-menggunakan-library)
 - [Cara _Run_ program](#cara-run-program)
 - [Author](#author)
@@ -35,8 +35,10 @@ Setelah itu, dilakukan rekursif hingga tidak ada titik lain yang dapat membentuk
 
 ## Environment dan Requirements
 ```
+Environment:
 -Python 3.9
 -Windows 10
+Requirements:
 -Library pandas python
 -Library math python
 -Library mathplotlib python

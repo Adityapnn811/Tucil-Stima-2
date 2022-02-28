@@ -14,6 +14,9 @@ print("1. iris ")
 print("2. wine ")
 print("3. breast cancer ")
 inputData = int(input("Masukan nomor dataset yang Anda inginkan: "))
+while not 1<= inputData <= 3:
+    print("Input diluar batas")
+    inputData = int(input("Masukan nomor dataset yang Anda inginkan: "))
 # Load dataset berdasarkan masukan pengguna
 if inputData == 1:
     data = datasets.load_iris()
@@ -21,6 +24,9 @@ if inputData == 1:
     print("1. Sepal Width vs Sepal Length")
     print("2. Petal Width vs Petal Length")
     inputTitle = int(input("Masukan nomor pilihan: "))
+    while not 1<= inputTitle <= 2:
+        print("Input diluar batas")
+        inputTitle = int(input("Masukan nomor pilihan: "))
     if inputTitle == 1:
         awal = 0
         akhir = 1
@@ -35,6 +41,9 @@ elif inputData == 2:
     print("1. Alcohol vs Malic Acid")
     print("2. Ash vs Alcalinity of Ash")
     inputTitle = int(input("Masukan nomor pilihan: "))
+    while not 1<= inputTitle <= 2:
+        print("Input diluar batas")
+        inputTitle = int(input("Masukan nomor pilihan: "))
     if inputTitle == 1:
         awal = 0
         akhir = 1
@@ -49,6 +58,9 @@ else:
     print("1. Mean Radius vs Mean Texture")
     print("2. Mean Perimeter vs Mean Area")
     inputTitle = int(input("Masukan nomor pilihan: "))
+    while not 1<= inputTitle <= 2:
+        print("Input diluar batas")
+        inputTitle = int(input("Masukan nomor pilihan: "))
     if inputTitle == 1:
         awal = 0
         akhir = 1

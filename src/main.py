@@ -73,7 +73,6 @@ else:
 # Buat DataFrame
 df = pd.DataFrame(data.data, columns=data.feature_names)
 df['Target'] = pd.DataFrame(data.target)
-pd.set_option("max_column", None)
 
 #visualisasi hasil ConvexHull
 plt.figure(figsize = (10, 6))
